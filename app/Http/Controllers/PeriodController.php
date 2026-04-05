@@ -84,13 +84,32 @@ class PeriodController extends Controller
     }
 
     public function stats()
-{
-    $periods = auth()->user()->periods()->orderBy('start_date', 'asc')->get();
-    
-    // Data untuk grafik durasi
-    $durations = $periods->map(fn($p) => $p->duration ?? 0);
-    $dates = $periods->map(fn($p) => \Carbon\Carbon::parse($p->start_date)->format('d M'));
+    {
+        $periods = auth()->user()->periods()->orderBy('start_date', 'asc')->get();
 
-    return view('periods.stats', compact('durations', 'dates'));
-}
+        // Data untuk grafik durasi
+        $durations = $periods->map(fn($p) => $p->duration ?? 0);
+        $dates = $periods->map(fn($p) => \Carbon\Carbon::parse($p->start_date)->format('d M'));
+
+        return view('periods.stats', compact('durations', 'dates'));
+    }
+
+    public function calendar()
+    {
+        $periods = auth()->user()->periods()->get();
+
+        // Format data agar sesuai dengan standar FullCalendar
+        $events = $periods->map(function ($period) {
+            return [
+                'title' => 'Menstruasi',
+                'start' => $period->start_date,
+                'end' => \Carbon\Carbon::parse($period->end_date)->addDay()->format('Y-m-d'), // +1 day agar FullCalendar menampilkannya full
+                'backgroundColor' => '#f472b6', // Pink-400
+                'borderColor' => '#f472b6',
+                'display' => 'block'
+            ];
+        });
+
+        return view('periods.calendar', compact('events'));
+    }
 }

@@ -10,7 +10,7 @@
         </a>
 
         {{-- Menu Kalender (Rencana) --}}
-        <a href="#" class="flex flex-col items-center group">
+        <a href="{{ route('calendar') }}" class="flex flex-col items-center group">
             <div class="p-2 rounded-2xl {{ request()->routeIs('calendar') ? 'bg-pink-400 text-white' : 'text-rose-300 group-hover:text-pink-400' }} transition-all">
                 <i class="fa-solid fa-calendar-days text-xl w-6 h-6 flex items-center justify-center"></i>
             </div>
