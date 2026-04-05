@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     
     // Tambahan jika nanti butuh hapus riwayat
     Route::delete('/periods/{period}', [PeriodController::class, 'destroy'])->name('periods.destroy');
+
+    Route::get('/stats', [PeriodController::class, 'stats'])->name('stats');
 });
 
 require __DIR__.'/auth.php';
