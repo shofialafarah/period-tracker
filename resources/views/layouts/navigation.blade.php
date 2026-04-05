@@ -9,13 +9,21 @@
             <span class="text-[9px] mt-1 font-bold uppercase {{ request()->routeIs('dashboard') ? 'text-pink-500' : 'text-rose-300' }}">Beranda</span>
         </a>
 
-        {{-- Menu Kalender (Rencana) --}}
+        {{-- Menu Kalender --}}
         <a href="{{ route('calendar') }}" class="flex flex-col items-center group">
             <div class="p-2 rounded-2xl {{ request()->routeIs('calendar') ? 'bg-pink-400 text-white' : 'text-rose-300 group-hover:text-pink-400' }} transition-all">
                 <i class="fa-solid fa-calendar-days text-xl w-6 h-6 flex items-center justify-center"></i>
             </div>
             <span class="text-[9px] mt-1 font-bold uppercase text-rose-300">Kalender</span>
         </a>
+
+        {{-- Menu Diary --}}
+    <a href="{{ route('diaries.index') }}" class="flex flex-col items-center group">
+        <div class="p-2 rounded-2xl {{ request()->routeIs('diaries.*') ? 'bg-pink-400 text-white' : 'text-rose-300' }}">
+            <i class="fa-solid fa-book-open-reader text-xl"></i>
+        </div>
+        <span class="text-[9px] mt-1 font-bold uppercase {{ request()->routeIs('diaries.*') ? 'text-pink-500' : 'text-rose-300' }}">Diary</span>
+    </a>
 
         {{-- Menu Statistik --}}
         <a href="{{ route('stats') }}" class="flex flex-col items-center group">
