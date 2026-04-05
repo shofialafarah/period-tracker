@@ -18,7 +18,7 @@
         </a>
 
         {{-- Menu Statistik --}}
-        <a href="#" class="flex flex-col items-center group">
+        <a href="{{ route('stats') }}" class="flex flex-col items-center group">
             <div class="p-2 rounded-2xl {{ request()->routeIs('stats') ? 'bg-pink-400 text-white' : 'text-rose-300 group-hover:text-pink-400' }} transition-all">
                 <i class="fa-solid fa-chart-line text-xl w-6 h-6 flex items-center justify-center"></i>
             </div>

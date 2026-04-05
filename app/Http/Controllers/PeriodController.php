@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Period;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PeriodController extends Controller
@@ -80,4 +82,15 @@ class PeriodController extends Controller
         }
         return back()->with('error', 'Wah, kamu nggak bisa hapus ini.');
     }
+
+    public function stats()
+{
+    $periods = auth()->user()->periods()->orderBy('start_date', 'asc')->get();
+    
+    // Data untuk grafik durasi
+    $durations = $periods->map(fn($p) => $p->duration ?? 0);
+    $dates = $periods->map(fn($p) => \Carbon\Carbon::parse($p->start_date)->format('d M'));
+
+    return view('periods.stats', compact('durations', 'dates'));
+}
 }
